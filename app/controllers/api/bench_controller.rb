@@ -1,19 +1,22 @@
 class Api::BenchController < ApplicationController
 
   def index
-    @bench = Bench.all();
-    render :json # use jbuilder
+    # @bench = Bench.all();
+    @bench = Bench.in_bounds(params[:bounds]);
   end
 
   def create
     @bench = Bench.new(bench_params)
-    @bench.save!
-    render :json @bench # user jbuilder
+    if @bench.save
+      render :show
+    else
+      render json: @bench.errors.full_messages, status: 422
+    end
   end
 
   private
     def bench_params
-      params.require(:bench).permit(:lat, :lng)
+      params.require(:bench).permit(:lat, :lng, :bounds)
     end
 
 end
