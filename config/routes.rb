@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     resources :bench, only: [:create, :destroy, :index]
   end
+
 end
