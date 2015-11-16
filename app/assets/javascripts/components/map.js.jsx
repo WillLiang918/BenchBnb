@@ -28,14 +28,17 @@ window.Map = React.createClass({
       var bounds = that.map.getBounds();
       var northEast = {
         lat: bounds.getNorthEast().lat(),
-        lgn: bounds.getNorthEast().lng()
+        lng: bounds.getNorthEast().lng()
       };
       var southWest = {
         lat: bounds.getSouthWest().lat(),
         lng: bounds.getSouthWest().lng()
       };
       bounds = { northEast: northEast, southWest: southWest};
-      ApiUtil.fetchBenches(bounds);
+      // FilterActions.FilterParams(bounds);
+      FilterActions.FilterParams(bounds);
+      console.log(FilterParamsStore.all());
+      // ApiUtil.fetchBenches(FilterParamsStore.all());
     });
   },
 

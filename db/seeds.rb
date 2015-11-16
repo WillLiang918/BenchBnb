@@ -6,14 +6,16 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+Bench.delete_all
+
 bench1 = Bench.create(
-  description: "Papalote", lat: 37.775785, lng: -122.445979
+  description: "Papalote", lat: 37.775785, lng: -122.445979, seating: 3
 )
 
 bench2 = Bench.create(
-  description: "The Little Chihuahua", lat: 37.772045, lng: -122.437015
+  description: "The Little Chihuahua", lat: 37.772045, lng: -122.437015, seating: 2
 )
 
 bench3 =  Bench.create(
-  description: "Cancun", lat: 37.781899, lng: -122.410426
+  description: "Cancun", lat: 37.781899, lng: -122.410426, seating: 3
 )

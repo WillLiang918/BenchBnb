@@ -1,11 +1,21 @@
 (function (root) {
-  var _filter = []; // {bounds: "", min: "", max: ""}
+  var _filter_params = {minSeats: 1, maxSeats: 10}; // {bounds: "", min: "", max: ""}
   var CHANGE_EVENT = "change";
+  var resetFilters = function (filter) {
+    _filter_params.bounds = filter;
+  };
+  var updateMinSeats = function (newMin) {
+    _filter_params.minSeats = newMin;
+  };
+  var updateMaxSeats = function (newMax) {
+    _filter_params.maxSeats = newMax;
+  };
 
-  root.FilterStore = $.extend( {}, EventEmitter.prototype, {
+  root.FilterParamsStore = $.extend( {}, EventEmitter.prototype, {
 
     handleChange: function () {
       this.emit(CHANGE_EVENT);
+      ApiUtil.fetchBenches(FilterParamsStore.all());
     },
 
     addChangeListener: function (callback) {
@@ -17,14 +27,22 @@
     },
 
     all: function () {
-      this._filter.slice();
+      return _filter_params;
     },
 
     dispatcherID: AppDispatcher.register(function (payload) {
       switch (payload.actionType) {
-        case BenchConstants.FILTER_BENCHES:
-          resetBenches(payload.benches);
-          FilterStore.handleChange();
+        case BenchConstants.FILTER_PARAMS:
+          resetFilters(payload.filterParams);
+          FilterParamsStore.handleChange();
+          break;
+        case BenchConstants.UPDATE_MIN_SEATS:
+          updateMinSeats(payload.filterParams);
+          FilterParamsStore.handleChange();
+          break;
+        case BenchConstants.UPDATE_MAX_SEATS:
+          updateMaxSeats(payload.filterParams);
+          FilterParamsStore.handleChange();
           break;
       }
     })

@@ -1,6 +1,6 @@
 window.Search = React.createClass ({
   getInitialState: function () {
-    return { params: FilterStore.all() };
+    return { params: FilterParamsStore.all() };
     // return {lat: "", lng: ""};
   },
 
@@ -10,15 +10,15 @@ window.Search = React.createClass ({
   },
 
   componentDidMount: function () {
-    FilterStore.addChangeListener(this._onChange);
+    FilterParamsStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount: function () {
-    FilterStore.deleteChangeListener(this._onChange);
+    FilterParamsStore.deleteChangeListener(this._onChange);
   },
 
   _onChange: function () {
-    this.setState({params: FilterStore.all() });
+    this.setState({params: FilterParamsStore.all() });
   },
 
   render: function () {
@@ -27,6 +27,7 @@ window.Search = React.createClass ({
         <Map clickMapHandler={this.clickMapHandler}
          onClick={this.clickMapHandler}/>
         <Index />
+        <Filter />
       </div>
     );
   }
