@@ -9,6 +9,7 @@ window.Map = React.createClass({
       center: {lat: 37.7758, lng: -122.435},
       zoom: 13
     };
+    this.markers = [];
     this.map = new google.maps.Map(map, mapOptions);
     this.listenForMove();
     BenchStore.addChangeListener(this.onChange);
@@ -40,12 +41,14 @@ window.Map = React.createClass({
         name: bench.description,
         map: this.map
       });
-      marker.addListener("")
+      this.markers.push(marker);
     }.bind(this));
   },
 
   removeMarkers: function () {
-    debugger
+    this.markers.forEach( function (marker) {
+      marker.setMap(null);
+    });
   },
 
   render: function () {

@@ -13,6 +13,14 @@ window.Index = React.createClass ({
   },
 
   render: function () {
-    return <div>Hello</div>;
+    return <div>
+      <ul className="bench-list">
+      {
+        BenchStore.all().map( function (bench, idx) {
+          return <li key={idx}>{bench.description}</li>;
+        })
+      }
+      </ul>
+    </div>;
   }
 });
