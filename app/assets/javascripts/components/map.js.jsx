@@ -13,6 +13,13 @@ window.Map = React.createClass({
     this.map = new google.maps.Map(map, mapOptions);
     this.listenForMove();
     BenchStore.addChangeListener(this.onChange);
+    google.maps.event.addListener(this.map, "click", function (event) {
+      this.clickMapHandler(event.latLng);
+    }.bind(this));
+  },
+
+  componentWillUnmount: function () {
+    BenchStore.deleteChangeListener(this.onChange);
   },
 
   listenForMove: function () {
@@ -49,6 +56,10 @@ window.Map = React.createClass({
     this.markers.forEach( function (marker) {
       marker.setMap(null);
     });
+  },
+
+  clickMapHandler: function (event) {
+    this.props.clickMapHandler(event);
   },
 
   render: function () {

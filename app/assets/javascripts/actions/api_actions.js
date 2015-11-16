@@ -6,4 +6,10 @@ ApiActions = {
     });
   },
 
+  createBench: function(bench){
+    AppDispatcher.dispatch({
+      actionType: BenchConstants.CREATE_BENCH,
+      bench: bench
+    });
+  },
 };

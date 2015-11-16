@@ -14,9 +14,13 @@ class Api::BenchController < ApplicationController
     end
   end
 
+  def show
+    @bench = Bench.find(params[id])
+  end
+  
   private
     def bench_params
-      params.require(:bench).permit(:lat, :lng, :bounds)
+      params.require(:bench).permit(:lat, :lng, :description, :bounds)
     end
 
 end

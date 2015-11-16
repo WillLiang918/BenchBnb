@@ -23,15 +23,19 @@
     },
 
     render: function () {
-
     },
 
-    dispatcherID: AppDispatcher.register(function(payload){
-      if(payload.actionType === BenchConstants.BENCHES_RECEIVED){
-        resetBenches(payload.benches);
-        BenchStore.handleChange();
+    dispatcherID: AppDispatcher.register(function (payload) {
+      switch (payload.actionType) {
+        case BenchConstants.BENCHES_RECEIVED:
+          resetBenches(payload.benches);
+          BenchStore.handleChange();
+          break;
+        case BenchConstants.CREATE_BENCH:
+          _benches.push(payload.bench);
+          BenchStore.handleChange();
+          break;
       }
     })
-
   });
 })(this);
