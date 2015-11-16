@@ -23,6 +23,7 @@ window.Filter = React.createClass({
           <input
           type="text"
           id="minSeats"
+          value={this.state.minSeats}
           onChange={this.updateMinSeats}/>
         </div>
 
@@ -31,6 +32,7 @@ window.Filter = React.createClass({
           <input
           type="text"
           id="maxSeats"
+          value={this.state.maxSeats}
           onChange={this.updateMaxSeats}/>
         </div>
       </div>

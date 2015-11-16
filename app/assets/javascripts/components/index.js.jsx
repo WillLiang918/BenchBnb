@@ -11,12 +11,16 @@ window.Index = React.createClass ({
     this.setState({benches: BenchStore.all()});
   },
 
+  redirectToShowPage: function () {
+    debugger
+  },
+
   render: function () {
     return <div>
       <ul className="bench-list">
       {
         BenchStore.all().map( function (bench, idx) {
-          return <li key={idx}>{bench.description}</li>;
+          return <li key={idx} onClick={this.redirectToShowPage}>{bench.description}</li>;
         })
       }
       </ul>
